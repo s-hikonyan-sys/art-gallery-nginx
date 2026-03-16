@@ -9,14 +9,6 @@ help:
 
 lint:
 	@echo "Checking nginx configuration syntax..."
-	@if command -v docker >/dev/null 2>&1; then \
-		docker run --rm \
-			-v "$$(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro" \
-			nginx:latest \
-			nginx -t; \
-	else \
-		echo "Error: Docker not found. Please install Docker or use nginx -t manually."; \
-		exit 1; \
-	fi
+	@./.nginx-lint.sh nginx.conf
 
 test: lint
