@@ -7,7 +7,7 @@ NGINX_CONF="${1:-nginx.conf}"
 NGINX_BIN="${NGINX_BIN:-nginx}"
 
 log_info() {
-  echo "$(date -Is) INFO: ${1}"
+  echo "$(date -Is) INFO: ${1}" >&2
 }
 
 log_error() {
@@ -16,7 +16,7 @@ log_error() {
 
 create_temp_config() {
   local -r source_conf="${1}"
-  local -r temp_conf
+  local temp_conf
 
   temp_conf="$(mktemp /tmp/nginx.conf.lint.XXXXXX)"
   cp "${source_conf}" "${temp_conf}"
